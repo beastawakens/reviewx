@@ -1,0 +1,12 @@
+services:
+  reviewx:
+    build: .
+    port: 80
+    domain: ${DOMAIN}
+    scale:
+      count: 1-4
+      memory: 128
+      cpu: 128
+      targets:
+        memory: 90
+        cpu: 90

@@ -1,0 +1,13 @@
+server {
+    listen ${LISTEN_PORT};
+    server_name ~^(?<branch>[^.]+)\.${SERVER_NAME};
+    
+    location / {
+            proxy_pass http://${SERVICE_NAME}.${APP_NAME}-${DOLLAR}branch:${SERVICE_PORT};
+        }
+    add_header X-Frame-Options "SAMEORIGIN";
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+    add_header Cache-Control "no-cache, no-store, must-revalidate";
+    client_max_body_size 20M;
+}
